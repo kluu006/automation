@@ -26,5 +26,24 @@ Feature: Navigate through reddit
 
         Examples:
             | subreddit |
-            | news    |
+            | news      |
             | aww       |
+
+    @tab
+     Scenario: Clicking on the tabs in the tab menu sends me to the respective tab page
+        Given I have the following <subreddit> subreddit
+        When I click on <subreddit> subreddit
+        Then I navigate to <subreddit> subreddit
+        Then I click on <tab> tab
+        Then I am on the <tab> tab <subreddit> page
+
+        Examples:
+            | subreddit | tab   |
+            | AskReddit | new   |
+            | AskReddit | rising |
+            | AskReddit | controversial |
+            | AskReddit | top |
+            | funny | new   |
+            | funny | rising |
+            | funny | controversial |
+            | funny | top |

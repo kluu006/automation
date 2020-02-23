@@ -49,21 +49,36 @@ def navigate_to_subreddit(step, sub):
     assert driver.driver.current_url == "https://old.reddit.com/r/%s/" % subreddit.name, driver.driver.current_url
 
 
-@step('Then I click on the header image')
+@step('I click on the header image')
 def click_on_header_image(step):
     # click on the header image in the top banner
     try:
         image = driver.driver.find_element_by_id("header-img-a")
-
         image.click()
     except NoSuchElementException:
         raise Exception("Element does not exist to be clicked.")
 
 
 @step('I am on the home page')
-def navigate_to_home_page(step):
+def verify_on_home_page(step):
     # validate if on the home page
     assert driver.driver.current_url == "https://old.reddit.com/", driver.driver.current_url
+
+
+@step('I click on (\S+) tab')
+def navigate_to_tab_page(step, tab):
+    # click on the tab
+    try:
+        page = driver.driver.find_element_by_xpath("//ul[@class='tabmenu ']/li/a[contains(text(),'%s')]" % tab)
+        page.click()
+    except NoSuchElementException:
+        raise Exception("Element does not exist to be clicked.")
+
+
+@step('I am on the (\S+) tab (\S+) page')
+def verify_on_tab_page_of_subreddit(step, tab, subreddit):
+    # validate if on the home page
+    assert driver.driver.current_url == "https://old.reddit.com/r/%s/%s/" % (subreddit, tab), driver.driver.current_url
 
 
 @after.all
