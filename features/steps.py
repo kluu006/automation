@@ -4,6 +4,7 @@ from selenium import webdriver
 import driver
 import subreddit
 from selenium.common.exceptions import NoSuchElementException
+from lettuce import world
 
 
 @before.all
